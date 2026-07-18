@@ -1,0 +1,15 @@
+# infrastructure/config/client.yaml (Main repository SPI adapter local fragment)
+gateway:
+  provider: higress
+  baseUrl: ${GATEWAY_BASE_URL}
+model:
+  qwen: { type: dashscope, default: true }      # Third-party LLM (§4.4.4)
+  openai: { type: openai }
+  claude: { type: anthropic }
+cache:
+  provider: redis                               # core; valkey is OSI replacement
+vectorStore:
+  preference: qdrant                            # Default; milvus alternative (§10.4)
+observability:
+  otelTraces: true
+  auditLog: true                                # core baseline (§4.8)
