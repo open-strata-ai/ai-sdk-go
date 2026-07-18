@@ -1,6 +1,6 @@
 # ADR-0001: AgentRuntime local execution
 
-- **Status**: Pending (Open)
+- **Status**: Accepted — see R-001 in `openstrata-meta/contracts/adr-resolutions.md`
 - **Date**: 2026-07-17
 - **Suggested by**: OpenStrata Architecture Group
 - **Repository**: ai-sdk-go
@@ -27,7 +27,7 @@ This ADR solidifies "AgentRuntime local execution" into an architectural decisio
 
 ## To be aligned / Follow-ups (Follow-ups)
 
-- Solidify the decision before the review at the corresponding stage, and write the final conclusion back into this ADR (the status is changed from "Pending" to "Adopted").
+- **Resolution (R-001)**: Accepted — one `AgentRuntimePort` SPI, two bindings (local native executor + remote binding to `ai-gateway-core`), gateway-selected at runtime; default = remote, local executor opt-in for offline/air-gapped. See `openstrata-meta/contracts/adr-resolutions.md`.
 
 ## Traceback
 
