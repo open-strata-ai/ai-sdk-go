@@ -3,7 +3,7 @@
 > **Source**: design/DESIGN.md §6 (SPI Mapping Table) · §7 (Configuration Key) · §8 (Version/SemVer)
 > **Audience**: Platform integration engineers, CI/CD verification, AI coding agents
 > **Collaboration**: arch/ARCH.md (architecture) · skills/SKILLS.md (coding rules) · bom.yaml (§16)
-> **Platform version**: strata v1.4.0
+> **Platform version**: strata v1.0.0
 
 ---
 
@@ -16,10 +16,10 @@
 
 | SDK port (pkg/domain) | platform canonical | interface_versions | SDK role | default Adapter | optional |
 | --- | --- | --- | --- | --- | --- |
-| `Gateway` | **Gateway** | 1.2.0 | Production | Higress | false |
-| `AgentRuntime` | **AgentRuntime** | 1.3.0 | Production | LangGraph Binding | false |
+| `Gateway` | **Gateway** | 1.0.0 | Production | Higress | false |
+| `AgentRuntime` | **AgentRuntime** | 1.0.0 | Production | LangGraph Binding | false |
 | `LLMProvider` | **LLMProvider** | 1.0.0 | Production | Qwen/OpenAI/Claude | false |
-| `VectorStore` | **VectorStore** | 1.1.0 | Production | Qdrant | false |
+| `VectorStore` | **VectorStore** | 1.0.0 | Production | Qdrant | false |
 | `Cache` | **Cache** | 1.0.0 | Production | Redis | false |
 | `Auth` | **Auth** | 1.0.0 | Consume | Keycloak | false |
 | `Tracing` | **Tracing** | 1.0.0 | Production | OTel/Langfuse | false |
@@ -131,7 +131,7 @@ explicit client.Option > environment variables > Configuration file snippet > pl
 
 ### 3.1 SDK own version (SemVer)
 
-- Current version: `v1.4.0` (aligned with `strata v1.4.0`, §16.1)
+- Current version: `v1.0.0` (aligned with `strata v1.0.0`, §16.1)
 - MAJOR: destructive API changes (such as interface method signature modification)
 - MINOR: New port/function/Adapter, backward compatible
 - PATCH: Bug fixes, performance optimization, document updates
@@ -144,10 +144,10 @@ The SDK promises compatibility with the following `interface_versions`:
 
 | Port | Minimum compatible version | Constraints | Change policy |
 |------|-----------------|------|----------|
-| Gateway | 1.2.0 | OpenAI-compatible protocol remains unchanged | Add optional field → MINOR; Add required field → MAJOR |
-| AgentRuntime | 1.3.0 | AgentSpec `apiVersion: openstrata.io/v1` | Spec added optional field for backward compatibility |
+| Gateway | 1.0.0 | OpenAI-compatible protocol remains unchanged | Add optional field → MINOR; Add required field → MAJOR |
+| AgentRuntime | 1.0.0 | AgentSpec `apiVersion: openstrata.io/v1` | Spec added optional field for backward compatibility |
 | LLMProvider | 1.0.0 | chat/embed/rerank/stream Signature stable | Signature change→MAJOR; New method→MINOR |
-| VectorStore | 1.1.0 | upsert/search/delete stable | Return structure field changes→MAJOR |
+| VectorStore | 1.0.0 | upsert/search/delete stable | Return structure field changes→MAJOR |
 | Cache | 1.0.0 | get/set stable | Same as above |
 
 ### 3.3 Cross-language consistency constraints
@@ -160,7 +160,7 @@ The SDK promises compatibility with the following `interface_versions`:
 
 | SDK version | platform strata | bom.yaml tag | Go module |
 |----------|------------|-------------|-----------|
-| v1.4.0 | v1.4.0 | v1.4.0 | `github.com/openstrata/ai-sdk-go v1.4.0` |
+| v1.0.0 | v1.0.0 | v1.0.0 | `github.com/openstrata/ai-sdk-go v1.0.0` |
 
 Change process:
 1. SDK repository tag (such as `v1.5.0`)

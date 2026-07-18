@@ -3,7 +3,7 @@
 > **Source**: design/DESIGN.md §1 (Positioning) · §2 (Core Abstraction) · §6 (SPI Mapping 15 Port)
 > **Audience**: Platform architects, SDK maintainers, AI coding agents
 > **Collaboration**: skills/SKILLS.md (extension points and coding rules) · specs/SPECS.md (contracts and versions) · design/adr/ (major decisions)
-> **Platform version**: strata v1.4.0
+> **Platform version**: strata v1.0.0
 
 ---
 
@@ -95,14 +95,14 @@ type LLMProvider interface {
     Stream(ctx context.Context, req ChatRequest) (<-chan StreamChunk, error)
 }
 
-//VectorStore - corresponding platform VectorStore SPI (§10.4), interface_versions: 1.1.0
+//VectorStore - corresponding platform VectorStore SPI (§10.4), interface_versions: 1.0.0
 type VectorStore interface {
     Upsert(ctx context.Context, col string, docs []Doc) error
     Search(ctx context.Context, col string, vec []float32, topK int) ([]Hit, error)
     Delete(ctx context.Context, col string, ids []string) error
 }
 
-//AgentRuntime —— Corresponding platform AgentRuntime SPI (§10.6 / §4.3.5), interface_versions: 1.3.0
+//AgentRuntime —— Corresponding platform AgentRuntime SPI (§10.6 / §4.3.5), interface_versions: 1.0.0
 type AgentRuntime interface {
     Load(ctx context.Context, spec *AgentSpec) (AgentHandle, error)
     Run(ctx context.Context, h AgentHandle, input map[string]any) (map[string]any, error)
@@ -114,7 +114,7 @@ type Cache interface {
     Set(ctx context.Context, key string, val []byte, ttl time.Duration) error
 }
 
-//Gateway - corresponding platform Gateway SPI (§4.4.1), interface_versions: 1.2.0
+//Gateway - corresponding platform Gateway SPI (§4.4.1), interface_versions: 1.0.0
 type Gateway interface {
     Invoke(ctx context.Context, req GatewayRequest) (GatewayResponse, error)
 }
@@ -201,10 +201,10 @@ c := client.New(
 
 | SDK Domain Port (pkg/domain) | Platform SPI Port (§10.4 canonical) | interface_versions | SDK Roles | Default Adapter (bom.yaml) |
 | --- | --- | --- | --- | --- |
-| `Gateway` | **Gateway** | 1.2.0 | Production(invoke) | Higress(core) |
-| `AgentRuntime` | **AgentRuntime** | 1.3.0 | Production (Load/Run) | LangGraph/Spring AI binding execution (core) |
+| `Gateway` | **Gateway** | 1.0.0 | Production(invoke) | Higress(core) |
+| `AgentRuntime` | **AgentRuntime** | 1.0.0 | Production (Load/Run) | LangGraph/Spring AI binding execution (core) |
 | `LLMProvider` | **LLMProvider** | 1.0.0 | Production (chat/embed/rerank/stream) | Qwen-Cloud / OpenAI / Claude (core third party) |
-| `VectorStore` | **VectorStore** | 1.1.0 | Production (upsert/search/delete) | Qdrant (core)/Milvus (optional) |
+| `VectorStore` | **VectorStore** | 1.0.0 | Production (upsert/search/delete) | Qdrant (core)/Milvus (optional) |
 | `Cache` | **Cache** | 1.0.0 | Production (semantic/accurate caching) | Redis (core)/Valkey (optional, OSI) |
 | `Auth` | **Auth** | 1.0.0 | Consumption (tenant Token verification) | Keycloak (core) |
 | `Tracing` | **Tracing** | 1.0.0 | Production (span) | Langfuse (core) / OTel (core baseline) |

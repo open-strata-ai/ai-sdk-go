@@ -3,7 +3,7 @@
 > **Source**: design/DESIGN.md §5 (Extension Points) · §4 (Key Usage and Code Examples) · §9 (Error Handling and Observability)
 > **Audience**: AI coding Agent, SDK secondary developers
 > **Collaboration**: arch/ARCH.md (architecture) · specs/SPECS.md (contract) · design/adr/ (decision record)
-> **Platform version**: strata v1.4.0
+> **Platform version**: strata v1.0.0
 
 ---
 
@@ -110,8 +110,8 @@ The SDK exposes all 15 types of port interfaces:
 
 | Port | Interface Signature Summary | Version |
 |------|-------------|------|
-| `Gateway` | `Invoke(context.Context, GatewayRequest) (GatewayResponse, error)` | 1.2.0 |
-| `AgentRuntime` | `Load(...), Run(...)` | 1.3.0 |
+| `Gateway` | `Invoke(context.Context, GatewayRequest) (GatewayResponse, error)` | 1.0.0 |
+| `AgentRuntime` | `Load(...), Run(...)` | 1.0.0 |
 | `LLMProvider` | `Chat(...), Embed(...), Rerank(...), Stream(...)` | 1.0.0 |
 | `VectorStore` | `Upsert(...), Search(...), Delete(...)` | 1.1.0 |
 | `Cache` | `Get(...), Set(...)` | 1.0.0 |

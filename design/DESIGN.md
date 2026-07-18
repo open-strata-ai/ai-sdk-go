@@ -10,7 +10,7 @@
 | **Language·Framework** | Go/Gin + Cobra + Wire (hot path Hertz/go-zero) |
 | **domain** | sdk |
 | **optional** | false (core, forced to be delivered with the platform) |
-| **Platform version** | v1.4.0 (`strata v1.4.0`, released 2026-07-15) |
+| **Platform version** | v1.0.0 (`strata v1.0.0`, released 2026-07-15) |
 | **Document Status** | Draft |
 | **Responsible Person** | OpenStrata Architecture Group |
 | **Associated links** | [arch/ARCH.md](./../arch/ARCH.md) · [skills/SKILLS.md](./../skills/SKILLS.md) · [specs/SPECS.md](./../specs/SPECS.md) · Architecture documentation §4.3.5 / §4.4 / §10.4 / §10.6 / §12 / §15.5 / §16 |
@@ -99,14 +99,14 @@ type LLMProvider interface {
     Stream(ctx context.Context, req ChatRequest) (<-chan StreamChunk, error)
 }
 
-//VectorStore - corresponding platform VectorStore SPI (§10.4), interface_versions: 1.1.0
+//VectorStore - corresponding platform VectorStore SPI (§10.4), interface_versions: 1.0.0
 type VectorStore interface {
     Upsert(ctx context.Context, col string, docs []Doc) error
     Search(ctx context.Context, col string, vec []float32, topK int) ([]Hit, error)
     Delete(ctx context.Context, col string, ids []string) error
 }
 
-//AgentRuntime —— Corresponding platform AgentRuntime SPI (§10.6 / §4.3.5), interface_versions: 1.3.0
+//AgentRuntime —— Corresponding platform AgentRuntime SPI (§10.6 / §4.3.5), interface_versions: 1.0.0
 type AgentRuntime interface {
     Load(ctx context.Context, spec *AgentSpec) (AgentHandle, error)
     Run(ctx context.Context, h AgentHandle, input map[string]any) (map[string]any, error)
@@ -118,7 +118,7 @@ type Cache interface {
     Set(ctx context.Context, key string, val []byte, ttl time.Duration) error
 }
 
-//Gateway - corresponding platform Gateway SPI (§4.4.1), interface_versions: 1.2.0
+//Gateway - corresponding platform Gateway SPI (§4.4.1), interface_versions: 1.0.0
 type Gateway interface {
     Invoke(ctx context.Context, req GatewayRequest) (GatewayResponse, error)
 }
@@ -168,10 +168,10 @@ graph TB
 
 ```bash
 # Go 1.22+，module path Right now import prefix
-go get github.com/openstrata/ai-sdk-go@v1.4.0
+go get github.com/openstrata/ai-sdk-go@v1.0.0
 ```
 
-`go.mod` alignment: `require github.com/openstrata/ai-sdk-go v1.4.0`. The `go.mod` of the SDK only introduces the standard library + a small number of necessary dependencies (`google/wire`, `gin`, `yaml`, `otel`), without retransmitting dependencies to avoid contaminating the host application (§15.5.1).
+`go.mod` alignment: `require github.com/openstrata/ai-sdk-go v1.0.0`. The `go.mod` of the SDK only introduces the standard library + a small number of necessary dependencies (`google/wire`, `gin`, `yaml`, `otel`), without retransmitting dependencies to avoid contaminating the host application (§15.5.1).
 
 ### 3.2 Initialization (bootstrap)
 
@@ -315,10 +315,10 @@ The SPI extension point of the SDK is **strictly mapped** to the SPI port of the
 
 | SDK Domain Port (pkg/domain) | Platform SPI Port (§10.4 canonical) | interface_versions | SDK Roles | Default Adapter (bom.yaml) |
 | --- | --- | --- | --- | --- |
-| `Gateway` | **Gateway** | 1.2.0 | Production(invoke) | Higress(core) |
-| `AgentRuntime` | **AgentRuntime** | 1.3.0 | Production (Load/Run) | LangGraph/Spring AI binding execution (core) |
+| `Gateway` | **Gateway** | 1.0.0 | Production(invoke) | Higress(core) |
+| `AgentRuntime` | **AgentRuntime** | 1.0.0 | Production (Load/Run) | LangGraph/Spring AI binding execution (core) |
 | `LLMProvider` | **LLMProvider** | 1.0.0 | Production (chat/embed/rerank/stream) | Qwen-Cloud / OpenAI / Claude (core third party) |
-| `VectorStore` | **VectorStore** | 1.1.0 | Production (upsert/search) | Qdrant (core)/Milvus (optional) |
+| `VectorStore` | **VectorStore** | 1.0.0 | Production (upsert/search) | Qdrant (core)/Milvus (optional) |
 | `Cache` | **Cache** | 1.0.0 | Production (semantic/accurate caching) | Redis (core)/Valkey (optional, OSI) |
 | `Auth` | **Auth** | 1.0.0 | Consumption (tenant Token verification context) | Keycloak (core) |
 | `Tracing` | **Tracing** | 1.0.0 | Production (span) | Langfuse (core) / OTel (core baseline) |
@@ -348,9 +348,9 @@ graph TB
         ML["MLOps"] --> EV["Eval"] --> LC["LowCode"]
     end
     subgraph "OpenStrata Platform SPI (§10.4)"
-        PG["Gateway 1.2.0"]; PLP["LLMProvider 1.0.0"]
-        PVS["VectorStore 1.1.0"]; PCA["Cache 1.0.0"]
-        PAR["AgentRuntime 1.3.0"]; PTR["Tracing 1.0.0"]
+        PG["Gateway 1.0.0"]; PLP["LLMProvider 1.0.0"]
+        PVS["VectorStore 1.0.0"]; PCA["Cache 1.0.0"]
+        PAR["AgentRuntime 1.0.0"]; PTR["Tracing 1.0.0"]
     end
     LP -.->|"Same name mapping"| PLP
     VS -.->|"Same name mapping"| PVS
@@ -395,15 +395,15 @@ observability:
 
 ## 8. Version and compatibility strategy (SemVer, align platform interface_versions)
 
-- **SDK own version**: Following SemVer, `github.com/openstrata/ai-sdk-go v1.4.0` aligns with platform `strata v1.4.0` (§16.1). Breaking changes bump `MAJOR` with ADR (`design/adr/`).
-- **SPI port version contract**: Each domain port is marked with the `interface_versions` (§16) to which it is aligned, evolving with the `bom.yaml` frozen snapshot. SDK v1.4.0 promises compatibility with:
+- **SDK own version**: Following SemVer, `github.com/openstrata/ai-sdk-go v1.0.0` aligns with platform `strata v1.0.0` (§16.1). Breaking changes bump `MAJOR` with ADR (`design/adr/`).
+- **SPI port version contract**: Each domain port is marked with the `interface_versions` (§16) to which it is aligned, evolving with the `bom.yaml` frozen snapshot. SDK v1.0.0 promises compatibility with:
 
 | Port | Minimum compatible interface_version | Description |
   | --- | --- | --- |
-| Gateway | 1.2.0 | OpenAI-compatible protocol unchanged |
-| AgentRuntime | 1.3.0 | AgentSpec `apiVersion: openstrata.io/v1` Backwards Compatibility |
+| Gateway | 1.0.0 | OpenAI-compatible protocol unchanged |
+| AgentRuntime | 1.0.0 | AgentSpec `apiVersion: openstrata.io/v1` Backwards Compatibility |
 | LLMProvider | 1.0.0 | chat/embed/rerank/stream signature stable |
-| VectorStore | 1.1.0 | upsert/search/delete stable |
+| VectorStore | 1.0.0 | upsert/search/delete stable |
 | Cache | 1.0.0 | Get/Set stable |
 
 - **Cross-language consistency**: `ai-sdk-go` / `ai-sdk-java` / `ai-sdk-python` The three-piece set has consistent semantics for method signatures on the same SPI port (AgentSpec convergence contract §4.3.5), ensuring that the same AgentSpec can be built by any language SDK and bound to any runtime instance for execution.
@@ -447,9 +447,9 @@ flowchart LR
 
 ### 10.2 Release process (Go Module)
 
-1. Tag `v1.4.0` in the `ai-sdk-go` repository (aligned with `strata v1.4.0`, §16.1).
+1. Tag `v1.0.0` in the `ai-sdk-go` repository (aligned with `strata v1.0.0`, §16.1).
 2. CI (`.github/`, each repository is independent): build → test → `go vet`/scan → `GOPROXY` publish to the module agent.
-3. Metacang `repos.yaml` / `bom.yaml` nail version (`tag: v1.4.0`, §15.6.4); Dependency Resolver is assembled accordingly.
+3. Metacang `repos.yaml` / `bom.yaml` nail version (`tag: v1.0.0`, §15.6.4); Dependency Resolver is assembled accordingly.
 4. The runtime can use the control plane `GET /v1/release/manifest` to audit whether the SDK version deviates from the certification list (§16.4).
 
 ---
