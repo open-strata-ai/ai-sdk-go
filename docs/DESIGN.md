@@ -401,7 +401,7 @@ observability:
 | Port | Minimum compatible interface_version | Description |
   | --- | --- | --- |
 | Gateway | 1.0.0 | OpenAI-compatible protocol unchanged |
-| AgentRuntime | 1.0.0 | AgentSpec `apiVersion: openstrata.io/v1` Backwards Compatibility |
+| AgentRuntime | 1.0.0 | AgentSpec `apiVersion: openstrata.cc/v1` Backwards Compatibility |
 | LLMProvider | 1.0.0 | chat/embed/rerank/stream signature stable |
 | VectorStore | 1.0.0 | upsert/search/delete stable |
 | Cache | 1.0.0 | Get/Set stable |
