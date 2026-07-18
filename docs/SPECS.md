@@ -145,7 +145,7 @@ The SDK promises compatibility with the following `interface_versions`:
 | Port | Minimum compatible version | Constraints | Change policy |
 |------|-----------------|------|----------|
 | Gateway | 1.0.0 | OpenAI-compatible protocol remains unchanged | Add optional field → MINOR; Add required field → MAJOR |
-| AgentRuntime | 1.0.0 | AgentSpec `apiVersion: openstrata.io/v1` | Spec added optional field for backward compatibility |
+| AgentRuntime | 1.0.0 | AgentSpec `apiVersion: openstrata.cc/v1` | Spec added optional field for backward compatibility |
 | LLMProvider | 1.0.0 | chat/embed/rerank/stream Signature stable | Signature change→MAJOR; New method→MINOR |
 | VectorStore | 1.0.0 | upsert/search/delete stable | Return structure field changes→MAJOR |
 | Cache | 1.0.0 | get/set stable | Same as above |

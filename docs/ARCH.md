@@ -15,7 +15,7 @@
 
 Core Commitments:
 - **Minimal Invasion**: Only relies on Go standard library + very few necessary dependencies (`google/wire`, `gin`, `httpx`, `yaml`, `otel`), can be embedded in any Go host application
-- **Declarative AgentSpec**: Agent behavior converges to `apiVersion: openstrata.io/v1` AgentSpec, language/runtime independent (§4.3.5)
+- **Declarative AgentSpec**: Agent behavior converges to `apiVersion: openstrata.cc/v1` AgentSpec, language/runtime independent (§4.3.5)
 - **Dependency Inversion**: All platform SPIs are exposed through the `pkg/domain` interface, and the SDK core is zero-modified when the host injects custom adapters
 
 ### 1.2 What problem is solved?
