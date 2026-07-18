@@ -19,7 +19,7 @@
 
 ## 1. Positioning and target users (application developers)
 
-`ai-sdk-go` is a **developer library** published to **Go Module Proxy** (`github.com/openstrata/ai-sdk-go`, corresponding to Go module path `github.com/openstrata/ai-sdk-go`), and is not a deployable service.
+`ai-sdk-go` is a **developer library** published to **Go Module Proxy** (`github.com/open-strata-ai/ai-sdk-go`, corresponding to Go module path `github.com/open-strata-ai/ai-sdk-go`), and is not a deployable service.
 
 - **What it solves**: Let Go developers build Agent/Client in their existing Go applications (microservices, CLI, background tasks) in a minimally intrusive way, and access the runtime capabilities of the OpenStrata platform (gateway, Agent runtime, tool registration, memory, RAG, cache, observability).
 - **SDK is not a gateway, not a runtime ontology**: SDK is "client + builder + extension port" - it isolates the domain logic of the repository (AgentSpec construction, tool encapsulation, SPI port definition) and anti-corrosion calls to platform SPI under `pkg/`, and the host application only needs to rely on `pkg/`.
@@ -168,10 +168,10 @@ graph TB
 
 ```bash
 # Go 1.22+，module path Right now import prefix
-go get github.com/openstrata/ai-sdk-go@v1.0.0
+go get github.com/open-strata-ai/ai-sdk-go@v1.0.0
 ```
 
-`go.mod` alignment: `require github.com/openstrata/ai-sdk-go v1.0.0`. The `go.mod` of the SDK only introduces the standard library + a small number of necessary dependencies (`google/wire`, `gin`, `yaml`, `otel`), without retransmitting dependencies to avoid contaminating the host application (§15.5.1).
+`go.mod` alignment: `require github.com/open-strata-ai/ai-sdk-go v1.0.0`. The `go.mod` of the SDK only introduces the standard library + a small number of necessary dependencies (`google/wire`, `gin`, `yaml`, `otel`), without retransmitting dependencies to avoid contaminating the host application (§15.5.1).
 
 ### 3.2 Initialization (bootstrap)
 
@@ -181,9 +181,9 @@ The SDK is assembled via `config.Load()` from the `infrastructure/config/` fragm
 package main
 
 import (
-    "github.com/openstrata/ai-sdk-go/pkg/client"
-    "github.com/openstrata/ai-sdk-go/pkg/config"
-    "github.com/openstrata/ai-sdk-go/pkg/adapter"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/client"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/config"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/adapter"
 )
 
 func main() {
@@ -212,9 +212,9 @@ package main
 
 import (
     "context"
-    "github.com/openstrata/ai-sdk-go/pkg/client"
-    "github.com/openstrata/ai-sdk-go/pkg/agent"
-    "github.com/openstrata/ai-sdk-go/pkg/adapter"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/client"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/agent"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/adapter"
 )
 
 func main() {
@@ -395,7 +395,7 @@ observability:
 
 ## 8. Version and compatibility strategy (SemVer, align platform interface_versions)
 
-- **SDK own version**: Following SemVer, `github.com/openstrata/ai-sdk-go v1.0.0` aligns with platform `strata v1.0.0` (§16.1). Breaking changes bump `MAJOR` with ADR (`docs/adr/`).
+- **SDK own version**: Following SemVer, `github.com/open-strata-ai/ai-sdk-go v1.0.0` aligns with platform `strata v1.0.0` (§16.1). Breaking changes bump `MAJOR` with ADR (`docs/adr/`).
 - **SPI port version contract**: Each domain port is marked with the `interface_versions` (§16) to which it is aligned, evolving with the `bom.yaml` frozen snapshot. SDK v1.0.0 promises compatibility with:
 
 | Port | Minimum compatible interface_version | Description |

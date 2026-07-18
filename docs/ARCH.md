@@ -11,7 +11,7 @@
 
 ### 1.1 What is SDK
 
-`ai-sdk-go` is the official developer library of the OpenStrata platform for the **Go ecosystem**, published to Go Module Proxy (`github.com/openstrata/ai-sdk-go`). It is a three-layer lightweight library of "client + builder + extension port", and is not a deployable service.
+`ai-sdk-go` is the official developer library of the OpenStrata platform for the **Go ecosystem**, published to Go Module Proxy (`github.com/open-strata-ai/ai-sdk-go`). It is a three-layer lightweight library of "client + builder + extension port", and is not a deployable service.
 
 Core Commitments:
 - **Minimal Invasion**: Only relies on Go standard library + very few necessary dependencies (`google/wire`, `gin`, `httpx`, `yaml`, `otel`), can be embedded in any Go host application

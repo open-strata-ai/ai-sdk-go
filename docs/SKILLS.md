@@ -139,9 +139,9 @@ package main
 
 import (
     "context"
-    "github.com/openstrata/ai-sdk-go/pkg/client"
-    "github.com/openstrata/ai-sdk-go/pkg/agent"
-    "github.com/openstrata/ai-sdk-go/pkg/adapter"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/client"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/agent"
+    "github.com/open-strata-ai/ai-sdk-go/pkg/adapter"
 )
 
 func main() {
@@ -197,7 +197,7 @@ tool = tool.WithMCP(agent.MCPConfig{Transport: "stdio"})
 ### 2.3 RAG retrieval
 
 ```go
-import "github.com/openstrata/ai-sdk-go/pkg/domain"
+import "github.com/open-strata-ai/ai-sdk-go/pkg/domain"
 
 //Get the query vector (embed via LLMProvider)
 emb, _ := c.LLMProvider().Embed(ctx, domain.EmbedRequest{

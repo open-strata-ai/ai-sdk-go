@@ -136,7 +136,7 @@ explicit client.Option > environment variables > Configuration file snippet > pl
 - MINOR: New port/function/Adapter, backward compatible
 - PATCH: Bug fixes, performance optimization, document updates
 - Destructive changes must be accompanied by ADR (`docs/adr/`)
-- Module path: `github.com/openstrata/ai-sdk-go`
+- Module path: `github.com/open-strata-ai/ai-sdk-go`
 
 ### 3.2 SPI port version contract
 
@@ -160,7 +160,7 @@ The SDK promises compatibility with the following `interface_versions`:
 
 | SDK version | platform strata | bom.yaml tag | Go module |
 |----------|------------|-------------|-----------|
-| v1.0.0 | v1.0.0 | v1.0.0 | `github.com/openstrata/ai-sdk-go v1.0.0` |
+| v1.0.0 | v1.0.0 | v1.0.0 | `github.com/open-strata-ai/ai-sdk-go v1.0.0` |
 
 Change process:
 1. SDK repository tag (such as `v1.5.0`)
