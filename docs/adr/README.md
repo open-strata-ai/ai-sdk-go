@@ -1,6 +1,6 @@
 # ai-sdk-go · ADR index (architectural decision record)
 
-> Source: `design/DESIGN.md` §11 Open issue. The status will be updated as the review progresses.
+> Source: `docs/DESIGN.md` §11 Open issue. The status will be updated as the review progresses.
 
 | ADR | Title | Status |
 | --- | --- | --- |

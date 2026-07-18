@@ -1,15 +1,15 @@
-# ADR-0002: Multi-tenant context propagation
+# ADR-0001: AgentRuntime local execution
 
-- **Status**: Pending Alignment
+- **Status**: Accepted — see R-001 in `openstrata-meta/contracts/adr-resolutions.md`
 - **Date**: 2026-07-17
 - **Suggested by**: OpenStrata Architecture Group
 - **Repository**: ai-sdk-go
-- **Source**: `design/DESIGN.md` §11 Open Issue
+- **Source**: `docs/DESIGN.md` §11 Open Issue
 - **Association**: (within this repository)
 
 ##Context
 
-Does the `MultiTenancy` port on the SDK side only consume the tenant context issued by the platform, or does it allow the host to perform tenant isolation locally? Requires alignment with §4.8 audit boundaries.
+Does the SDK provide a "pure Go native map executor" as a lightweight implementation of the `AgentRuntime` port (without relying on Python LangGraph / Java Spring AI instances)? Or just do remote binding?
 
 ## Decision Options (Options Considered)
 
@@ -19,7 +19,7 @@ Does the `MultiTenancy` port on the SDK side only consume the tenant context iss
 
 ## Recommended decision (Decision)
 
-This ADR solidifies "multi-tenant context propagation" into an architectural decision record and incorporates it into `design/adr/` for continuous tracking. This issue stems from the `design/DESIGN.md` §11 open issue and is still open.
+This ADR solidifies "AgentRuntime local execution" into an architectural decision record and incorporates it into `docs/adr/` for continuous tracking. This issue stems from the `docs/DESIGN.md` §11 open issue and is still open.
 
 **Conservative Default Principle**: Before the final decision is made, the "minimum available + explicit configuration switch" shall prevail, maintain the current behavior, and not destroy the existing contract and cross-repository SPI interface; this ADR status will be written back after review by the relevant team.
 
@@ -27,10 +27,9 @@ This ADR solidifies "multi-tenant context propagation" into an architectural dec
 
 ## To be aligned / Follow-ups (Follow-ups)
 
-- Associated architecture documents §4.8 (as a basis for decision-making and a source of consistency verification).
-- Solidify the decision before the review at the corresponding stage, and write the final conclusion back into this ADR (the status is changed from "Pending" to "Adopted").
+- **Resolution (R-001)**: Accepted — one `AgentRuntimePort` SPI, two bindings (local native executor + remote binding to `ai-gateway-core`), gateway-selected at runtime; default = remote, local executor opt-in for offline/air-gapped. See `openstrata-meta/contracts/adr-resolutions.md`.
 
 ## Traceback
 
-- Upstream design: `design/DESIGN.md` §11 Open issue
-- Relevance index: see `design/adr/README.md`
+- Upstream design: `docs/DESIGN.md` §11 Open issue
+- Relevance index: see `docs/adr/README.md`
