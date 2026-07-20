@@ -3,6 +3,14 @@
 All notable changes to `REPO_NAME` are documented here. This project adheres to
 [Semantic Versioning](https://semver.org) and the OpenStrata release process.
 
+
+## [1.0.0-alpha.2] - 2026-07-20
+
+Release 1.0.0-alpha.2 cut across all OpenStrata repositories from a shared main baseline.
+
+### Notes
+- Shared release tag v1.0.0-alpha.2 applied at the main HEAD of every repo.
+- See individual repos' changelogs for component-specific changes.
 ## [1.0.0-alpha] - 2026-07-19
 
 Re-cut: codegen implementation merged to main.
